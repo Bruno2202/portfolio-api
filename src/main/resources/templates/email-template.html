@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="margin: 0; padding: 0; background-color: #050505; color: #ffffff; font-family: Arial, sans-serif;">
+<table width="100%" bgcolor="#050505" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td align="center" style="padding: 20px;">
+
+            <table width="100%" style="max-width: 600px; background-color: #0f0f12; border: 1px solid #26262c; border-radius: 15px;" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td bgcolor="#1d1d26" style="padding: 20px; border-radius: 15px 15px 0 0; border-bottom: 2px solid #4f46e5;">
+                        <h2 style="margin: 0; font-size: 18px; color: #818cf8; text-transform: uppercase; letter-spacing: 2px;">🚀 Novo Lead - Portfolio</h2>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 30px 30px 10px 30px;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td style="padding-bottom: 15px;">
+                                    <span style="color: #6366f1; font-size: 12px; font-weight: bold; text-transform: uppercase;">Nome do Cliente:</span><br>
+                                    <strong style="font-size: 18px; color: #ffffff;" th:text="${nome}">Nome Aqui</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 15px;">
+                                    <span style="color: #6366f1; font-size: 12px; font-weight: bold; text-transform: uppercase;">E-mail para Contato:</span><br>
+                                    <a th:href="'mailto:' + ${emailRemetente}" style="color: #a855f7; text-decoration: none; font-size: 16px; font-weight: bold;" th:text="${emailRemetente}">email@cliente.com</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding: 10px 30px 30px 30px;">
+                        <div style="background-color: #16161a; border-left: 4px solid #4f46e5; padding: 20px; border-radius: 4px;">
+                            <span style="color: #9ca3af; font-size: 11px; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 10px;">Mensagem enviada:</span>
+                            <p style="margin: 0; color: #d1d5db; line-height: 1.6; font-size: 15px;" th:text="${mensagem}">
+                                "Texto da mensagem..."
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" style="padding: 0 30px 30px 30px;">
+                        <a th:href="'mailto:' + ${emailRemetente}" style="display: inline-block; background-color: #4f46e5; color: #ffffff; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; width: 80%; text-align: center;">
+                            📩 RESPONDER AGORA
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+</body>
+</html>
