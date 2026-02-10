@@ -21,6 +21,7 @@ public class EmailController {
     public ResponseEntity<String> sendEmail(@RequestBody EmailDTO emailDto) {
         try {
             emailService.sendEmail(emailDto);
+            emailService.sendIssuerEmail(emailDto);
 
             String response = "E-mail enviado com sucesso!";
             return ResponseEntity.ok(response);
