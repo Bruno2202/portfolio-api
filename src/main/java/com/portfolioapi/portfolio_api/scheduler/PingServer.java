@@ -11,15 +11,23 @@ import java.time.LocalTime;
 public class PingServer {
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${portfolioapi.api.url}")
+    @Value("${portfolioapi.api.url:http://localhost:8080}")
     private String apiUrl;
+
+    @Value("${portfolioapi.scheduler.on:false}")
+    private boolean isOn;
 
     @Scheduled(fixedRate = 300000)
     public void ping() {
+        if (!isOn) {
+            return;
+        }
+
         try {
-            restTemplate.getForObject(apiUrl + "/ping", String.class);
+            restTemplate.getForObject(apiUrl + "/actuator/health", String.class);
+            // System.out.println("Ping enviado com sucesso em: " + LocalTime.now());
         } catch (Exception e) {
-            System.err.println("Falha ao enviar Ping: " + e.getMessage());
+            System.err.println("Ping falhou: " + e.getMessage());
         }
     }
 }
