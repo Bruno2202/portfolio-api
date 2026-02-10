@@ -1,5 +1,6 @@
 package com.portfolioapi.portfolio_api.service;
 
+import com.portfolioapi.portfolio_api.dto.EmailDTO;
 import com.portfolioapi.portfolio_api.entity.Email;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -23,21 +24,21 @@ public class EmailService {
     @Value("${portfolioapi.email.defautlReceiver}")
     private String defaultReceiver;
 
-    public void sendIssuerEmail(Email email) {
+    public void sendIssuerEmail(EmailDTO email) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
             Context context = new Context();
-            context.setVariable("nome", email.getIssuerName());
-            context.setVariable("emailRemetente", email.getIssuerEmail());
-            context.setVariable("mensagem", email.getMessage());
+            context.setVariable("nome", email.issuerName());
+            context.setVariable("emailRemetente", email.issuerEmail());
+            context.setVariable("mensagem", email.message());
 
             String issuerHtmlContent = templateEngine.process("issuer-email-template", context);
 
             helper.setFrom(defaultReceiver);
-            helper.setTo(email.getIssuerEmail());
-            helper.setSubject("Olá " + email.getIssuerName() + ", vamos construir algo juntos? 🚀");
+            helper.setTo(email.issuerEmail());
+            helper.setSubject("Olá " + email.issuerName() + ", vamos construir algo juntos? 🚀");
             helper.setText(issuerHtmlContent, true);
 
 
@@ -48,22 +49,21 @@ public class EmailService {
         }
     }
 
-    public void sendEmail(Email email) {
+    public void sendEmail(EmailDTO email) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
             Context context = new Context();
-            context.setVariable("nome", email.getIssuerName());
-            context.setVariable("emailRemetente", email.getIssuerEmail());
-            context.setVariable("mensagem", email.getMessage());
-
+            context.setVariable("nome", email.issuerName());
+            context.setVariable("emailRemetente", email.issuerEmail());
+            context.setVariable("mensagem", email.message());
             String HtmlContent = templateEngine.process("email-template", context);
 
 
             helper.setFrom(defaultReceiver);
             helper.setTo(defaultReceiver);
-            helper.setSubject("Novo Contato: " + email.getIssuerName());
+            helper.setSubject("Novo Contato: " + email.issuerName());
             helper.setText(HtmlContent, true);
 
             mailSender.send(message);
