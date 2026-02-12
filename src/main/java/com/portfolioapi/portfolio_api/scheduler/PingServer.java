@@ -24,8 +24,8 @@ public class PingServer {
         }
 
         try {
-            restTemplate.getForObject(apiUrl + "/actuator/health", String.class);
-            // System.out.println("Ping enviado com sucesso em: " + LocalTime.now());
+            restTemplate.getForObject(apiUrl + "/ping", String.class);
+            System.out.println("Ping enviado com sucesso em: " + LocalTime.now());
         } catch (Exception e) {
             System.err.println("Ping falhou: " + e.getMessage());
         }
